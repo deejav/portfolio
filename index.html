@@ -13,20 +13,23 @@
 <body>
 
 <!-- ─── NAV ─── -->
-<nav>
-  <a href="#" class="nav-logo">Dee<span>.</span></a>
-  <ul class="nav-links" id="mobile-nav">
-    <li><a href="#about">About</a></li>
-    <li><a href="#wins">Wins</a></li>
-    <li><a href="#expertise">Expertise</a></li>
-    <li><a href="#tools">Tools</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="mailto:njathadorine@gmail.com" class="nav-cta">Hire Me →</a>
-  <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav" type="button">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+<div class="nav-pill-wrapper" id="navPill">
+  <nav class="nav-pill">
+    <div class="nav-pill-glass-layer"></div>
+    <a href="#" class="nav-logo">Dee<span>.</span></a>
+    <ul class="nav-links" id="mobile-nav">
+      <li><a href="#about">About</a></li>
+      <li><a href="#wins">Wins</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:njathadorine@gmail.com" class="nav-cta">Hire Me →</a>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav" type="button">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</div>
 
 <!-- ─── HERO ─── -->
 <section class="hero" id="about">
@@ -425,6 +428,50 @@
 </footer>
 
 <script>
+  // ─── PILL NAV: Adaptive Glassmorphism ───
+  const navPillWrapper = document.getElementById('navPill');
+  const navPill = navPillWrapper?.querySelector('.nav-pill');
+  const glassLayer = navPillWrapper?.querySelector('.nav-pill-glass-layer');
+
+  // Scroll-adaptive glass intensity
+  let lastScroll = 0;
+  let ticking = false;
+
+  const updateNavOnScroll = () => {
+    const scrollY = window.scrollY;
+    if (scrollY > 60) {
+      navPillWrapper.classList.add('scrolled');
+    } else {
+      navPillWrapper.classList.remove('scrolled');
+    }
+    lastScroll = scrollY;
+    ticking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateNavOnScroll);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Dynamic liquid glow that follows cursor over the nav
+  if (navPill && glassLayer) {
+    navPill.addEventListener('mousemove', (e) => {
+      const rect = navPill.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      navPill.style.setProperty('--mouse-x', `${x}%`);
+      navPill.style.setProperty('--mouse-y', `${y}%`);
+      glassLayer.style.opacity = '1';
+    });
+
+    navPill.addEventListener('mouseleave', () => {
+      glassLayer.style.opacity = '0';
+    });
+  }
+
+  // ─── Mobile Menu ───
   const mobileMenu = document.querySelector('.nav-links');
   const menuToggle = document.querySelector('.hamburger');
 
@@ -502,15 +549,15 @@
 
   // Active nav link highlight on scroll
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
+  const navLinks = document.querySelectorAll('.nav-pill .nav-links a');
 
   const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         navLinks.forEach(link => {
-          link.style.color = '';
+          link.classList.remove('active');
           if (link.getAttribute('href') === '#' + entry.target.id) {
-            link.style.color = 'var(--white)';
+            link.classList.add('active');
           }
         });
       }
