@@ -1023,87 +1023,6 @@
     border: 1px solid rgba(96,56,241,0.25);
   }
 
-  /* ─── EDUCATION ─── */
-  .education-section {
-    background: var(--black);
-  }
-
-  .education-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 3rem;
-  }
-
-  .edu-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 2rem;
-    display: flex;
-    gap: 1.25rem;
-    align-items: flex-start;
-    transition: border-color 0.3s;
-  }
-  .edu-card:hover {
-    border-color: rgba(56,241,189,0.2);
-  }
-
-  .edu-icon {
-    width: 2.8rem;
-    height: 2.8rem;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    color: var(--c2);
-    border: 1px solid rgba(56,241,189,0.28);
-    background: rgba(56,241,189,0.09);
-  }
-  .edu-icon svg {
-    width: 1.3rem;
-    height: 1.3rem;
-  }
-
-  .edu-degree {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 0.95rem;
-    margin-bottom: 0.2rem;
-    color: var(--white);
-  }
-
-  .edu-focus {
-    font-size: 0.85rem;
-    color: var(--c2);
-    margin-bottom: 0.3rem;
-    font-weight: 500;
-  }
-
-  .edu-school {
-    font-size: 0.78rem;
-    color: var(--muted);
-  }
-
-  .certs-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin-top: 2rem;
-  }
-
-  .cert-badge {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    padding: 0.4rem 0.9rem;
-    border-radius: 100px;
-    background: var(--violet-dim);
-    color: var(--c3);
-    border: 1px solid rgba(96,56,241,0.25);
-  }
-
   /* ─── MARQUEE TICKER ─── */
   .ticker-wrap {
     overflow: hidden;
@@ -1758,8 +1677,6 @@
     .case-metric-val { font-size: 1.6rem; }
 
     .projects-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-    .education-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-    .edu-card { padding: 1.5rem; }
   }
 
   @media (max-width: 600px) {
@@ -1969,10 +1886,6 @@
     .project-metric { font-size: 1.2rem; }
     .project-metric-label { font-size: 0.68rem; }
     .project-tool { font-size: 0.6rem; padding: 0.25rem 0.6rem; }
-
-    .edu-card { flex-direction: column; gap: 0.75rem; padding: 1.25rem; }
-    .edu-degree { font-size: 0.88rem; }
-    .cert-badge { font-size: 0.65rem; padding: 0.3rem 0.7rem; }
 
     .contact-title { font-size: clamp(2rem, 11vw, 2.6rem); }
     .contact-sub {
